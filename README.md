@@ -10,3 +10,14 @@ In the first milestone, the following key concepts and features will be covered:
 - *REST API Structure and Endpoints*: Learning to create RESTful APIs for user authentication, product management, and order handling.
 - *Database Schema Design*: Designing structured data models using MongoDB to store and manage application data.
 - *Role of Authentication in Web Applications*: Implementing secure login and registration functionalities to protect user data and resources.
+
+# Milestone 1
+
+Completed foundation for your E-Commerce Application.
+
+
+# Milestone 2
+
+* Separate folders for frontend and backend.
+* A functional Login Page in the frontend.
+* Completed setting for tailwind-css.
