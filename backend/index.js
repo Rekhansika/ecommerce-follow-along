@@ -1,21 +1,21 @@
 const express = require("express")
 
 const app = express();
+
+const connect = require("./mongoDB");
  
-app.get("/",(request,response)=>{
+app.get("/",(req,res)=>{
     try {
-        response.status(200).send({mgs:"This is e-commerce code along backend",data:[
-            {title:"test"},
-            {title:"test2"}
-        ]})
+        res.status(200).send({mgs:"This is e-commerce code along backend"});
     } catch (error) {
-        response.status(500).send({message:"error occured"});
+        res.status(500).send({message:"error occured"});
     }
 })
-app.listen(8080,()=>{
+app.listen(8000,async()=>{
     try {
-        console.log("connected to server successfully")
+        await connect();
+        console.log("Server connected successfully");
     } catch (error) {
-        console.log("Error")
+        console.log("Error",error)
     }
 })
