@@ -3,6 +3,7 @@ const express = require("express")
 const app = express();
 
 const connect = require("./mongoDB");
+const userRouter = require("./controller/userRouter");
  
 app.get("/",(req,res)=>{
     try {
@@ -11,6 +12,11 @@ app.get("/",(req,res)=>{
         res.status(500).send({message:"error occured"});
     }
 })
+
+//localhost:8000/user/login
+
+app.use("/user",userRouter)
+
 app.listen(8000,async()=>{
     try {
         await connect();
