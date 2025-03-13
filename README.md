@@ -43,3 +43,8 @@ Completed foundation for your E-Commerce Application.
 
 * Added the password encryption in backend signup page.
 * Added comparison for checking password is correct or not in login backend
+
+# Milestone 7
+
+* To Understand how to validate user credentials during login.
+* Learning how to compare the encrypted password with the user’s input.
