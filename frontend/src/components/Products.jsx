@@ -26,7 +26,7 @@ const Products = () => {
 
   return (
     <>
-    <h3>Products</h3>
+    <h1>Products</h1>
     <div className={styles.products}>
       {
         products.map((ele)=>{
