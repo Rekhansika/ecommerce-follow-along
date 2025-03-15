@@ -3,6 +3,7 @@ import axios from "axios"
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Card from './Card';
+import styles from "./products.module.css";
 
 const Products = () => {
     const [products,setProducts] = useState([]);
@@ -24,13 +25,17 @@ const Products = () => {
     },[])
 
   return (
-    <div>
+    <>
+    <h3>Products</h3>
+    <div className={styles.products}>
       {
         products.map((ele)=>{
             return <Card key={ele.id} product={ele}/>
         })
       }
     </div>
+
+    </>
   )
 }
 

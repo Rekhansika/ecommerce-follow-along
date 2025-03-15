@@ -48,3 +48,8 @@ Completed foundation for your E-Commerce Application.
 
 * To Understand how to validate user credentials during login.
 * Learning how to compare the encrypted password with the user’s input.
+
+# Milestone 8
+
+* added the Product Page in Frontend as a HomePage.
+* 
