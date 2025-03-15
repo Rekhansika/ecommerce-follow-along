@@ -52,4 +52,3 @@ Completed foundation for your E-Commerce Application.
 # Milestone 8
 
 * added the Product Page in Frontend as a HomePage.
-* 
