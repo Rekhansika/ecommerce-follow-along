@@ -1,9 +1,18 @@
 const express = require("express")
 
 const app = express();
+app.use(express.json());
+
+const dotenv = require("dotenv");
+dotenv.config();
+
+const cors = require("cors");
+app.use(cors());
 
 const connect = require("./mongoDB");
 const userRouter = require("./controller/userRouter");
+
+const productRouter = require("./controller/productRouter");
  
 app.get("/",(req,res)=>{
     try {
@@ -15,7 +24,10 @@ app.get("/",(req,res)=>{
 
 //localhost:8000/user/login
 
-app.use("/user",userRouter)
+app.use("/user",userRouter);
+
+app.use("/product",productRouter);
+
 
 app.listen(8000,async()=>{
     try {
