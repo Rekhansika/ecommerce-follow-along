@@ -68,3 +68,8 @@ Completed foundation for your E-Commerce Application.
 
 * Created HomePage for dynamic products presentation.
 * Added the backend part for handling products(created endpoint to get products).
+
+# Milesstone 12
+
+* Created ProductPage for dynamic product presentation according to user mail.
+* Created backend for specific user products.
