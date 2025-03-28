@@ -13,7 +13,7 @@
 }
 
 .navbar > div:nth-child(2) div{
-    color: rgb(205, 238, 149);
+    color: rgb(160, 213, 68);
     text-decoration: solid;
     font-weight: 500;
 }
@@ -27,7 +27,7 @@
 }
 
 .navbar h1{
-    color: rgb(142, 240, 198);
+    color: rgb(18, 191, 116);
     font-style: italic;
     font-size: xx-large;
     font-weight: 600;
