@@ -21,56 +21,27 @@ const userImageStore = multer.diskStorage({
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 189);
       cb(null,file.filename + '-' + uniqueSuffix + path.extname(file.originalname));
     }
-  })
+  });
+
+  const fileFilter = (req, file, cb) => {
+    const allowedMimeTypes = ["image/jpeg", "image/png", "image/jpg"];
+    if (!allowedMimeTypes.includes(file.mimetype)) {
+        return cb(new Error("Only JPEG, PNG, and JPG formats are allowed"), false);
+    }
+    cb(null, true);
+  };
 
   const userImage = multer({
     storage: userImageStore , 
     limits:{fileSize:5*1024*1024},
-    fileFilter:(req,file,cb)=>{
-      const extention = path.extname(file.originalname).toLowerCase();
-      const mimetype = file.mimetype;
-      const allowedExtention ={
-        jpeg:true,
-        png:true,
-        jpg:true
-      }
-      const allowedMimetype = {
-        "image/jpeg":true,
-        "image/png":true,
-        "image/jpg":true,
-      }
-
-      if(!allowedExtention[extention] && !allowedMimetype[mimetype]){
-        cb(new Error("File extention not allowed"))
-      }else{
-        cb(null,true)
-      }
-    }
-  });
+    fileFilter
+      });
+      
 
 const productImages = multer({
   storage: ProductImageStore , 
   limits:{fileSize:5*1024*1024},
-  fileFilter:(req,file,cb)=>{
-    const extention = path.extname(file.originalname).toLowerCase();
-    const mimetype = file.mimetype;
-    const allowedExtention ={
-      jpeg:true,
-      png:true,
-      jpg:true
-    }
-    const allowedMimetype = {
-      "image/jpeg":true,
-      "image/png":true,
-      "image/jpg":true,
-    }
-
-    if(!allowedExtention[extention] && !allowedMimetype[mimetype]){
-      cb(new Error("File extention not allowed"))
-    }else{
-      cb(null,true)
-    }
-  }
+  fileFilter
 });
 
 module.export = {userImage, productImages};

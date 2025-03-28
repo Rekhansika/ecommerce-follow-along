@@ -3,84 +3,61 @@
 ## Project Description
 The Ecommerce Follow-Along project is a mentor-guided initiative to create a full-stack e-commerce application using the MERN stack (MongoDB, Express, React, Node.js). This project aims to provide hands-on experience in building scalable web applications by implementing essential features such as user authentication, product management, and order handling.
 
-## Milestone 1: Project Overview
-In the first milestone, the following key concepts and features will be covered:
+# Milestone 1: **Laying the Foundation**
+✅ Initialized the project structure for both frontend and backend.
+✅ Installed necessary dependencies for React, Node.js, and Express.
+✅ Set up a basic server in Node.js using Express.js.
+✅ Configured environment variables for secure credentials.
 
-- *Overview of the MERN Stack*: Understanding the advantages of using MongoDB, Express, React, and Node.js to build full-stack web applications.
-- *REST API Structure and Endpoints*: Learning to create RESTful APIs for user authentication, product management, and order handling.
-- *Database Schema Design*: Designing structured data models using MongoDB to store and manage application data.
-- *Role of Authentication in Web Applications*: Implementing secure login and registration functionalities to protect user data and resources.
+# Milestone 2: **Structuring the Project & UI Setup**
+✅ Separated frontend and backend folders for modular development.
+✅ Created a functional login page in the frontend using React.js.
+✅ Installed and configured Tailwind CSS for responsive UI design.
 
-# Milestone 1
+# Milestone 3: **Backend Configuration & Database Connection**
+✅ Organized the backend folder structure for scalability.
+✅ Connected the server to MongoDB using Mongoose.
+✅ Implemented error-handling middleware for API stability.
 
-Completed foundation for your E-Commerce Application.
+# Milestone 4: **User Management & File Handling**
+✅ Created the User Model in Mongoose to define user data structure.
+✅ Developed the User Controller to manage user authentication (signup, login).
+✅ Implemented Multer for file handling, allowing user profile and product image uploads.
 
+# Milestone 5: **User Registration & File Handling**
+✅ Created the Sign up page in React and added code for signup backend also.
+✅ Added the Sign up page validation in (signup, login).
 
-# Milestone 2
+# Milestone 6: **Password Hashing By Using Bcryptjs**
+✅ added the password encryption in backend signup page.
+✅ added comparision for checking password is correct or not in login backend.
 
-* Separate folders for frontend and backend.
-* A functional Login Page in the frontend.
-* Completed setting for tailwind-css.
+# Milestone 7: **Password Decrypt By Using Bcryptjs**
+✅ added the Password authentication in backend login page.
+✅ Here we are first getting the hashed password from db serched by email and then comparing the input body password with hashed password by compare method in bcryptjs.
 
-# Milestone 3
+# Milestone 8: **Product Page In Frontend**
+✅ added the Product Page in Frontend as a Homepage.
 
-* Organized the backend folder structure for scalability.
-* Connected the server to MongoDb using Mongoose.
-* Implemented error-handling middleware for API stability.
+# Milestone 9: **Created Form For Product Upload**
+✅ Created the AddProducts page in Frontend.
+✅ Added form validation in AddProducts page.
 
-# Milestone 4
+# Milestone 10: **Created Schema Product Upload**
+✅ Created ProductModel in backend.
+✅ Created the productRouter page in Backend.
+✅ Handeled file uploads by multer inside middleware multer.
 
-* Created the User Model in Mongoose to define user data structure.
-* Developed the User Controller to manage user authentication (signup,login).
-* Implemented Multer for file handling , allowing user profile and product image uploads.
+# Milestone 11: **Created Homepage For Product**
+✅ Created Home Page for dynamic products presentation. 
+✅ added the backend part for handeling products (created endpoint to get products).
 
-# Milestone 5
+# Milestone 12: **Showing product according to user**
+✅ Created Product Page for dynamic products presentation according to user mail. 
+✅ Created backend for specific user products.
 
-* Created the Signup page in React and added code for signup backend also.
-* Added the Signup page validation in (signup,login).
+# Milestone 13: **Created Product Update**
+✅ Created Product Update Endpoint for Updating products. ✅ Created form for updating data in frontend and created autofill function.
 
-# Milestone 6
-
-* Added the password encryption in backend signup page.
-* Added comparison for checking password is correct or not in login backend
-
-# Milestone 7
-
-* To Understand how to validate user credentials during login.
-* Learning how to compare the encrypted password with the user’s input.
-
-# Milestone 8
-
-* Added the Product Page in Frontend as a HomePage.
-
-# Milestone 9
-
-* Created the Add Products page in Frontend.
-* Added form validation in Add Products Page.
-
-# Milestone 10
-
-* Created the ProductRouter page in Backend.
-* Created ProductModel in backend.
-* Handle file uploads by multer inside middleware multer.
-
-# Milestone 11
-
-* Created HomePage for dynamic products presentation.
-* Added the backend part for handling products(created endpoint to get products).
-
-# Milestone 12
-
-* Created ProductPage for dynamic product presentation according to user mail.
-* Created backend for specific user products.
-
-# Milestone 13
-
-* Created Product Update EndPoint for updating products.
-* Created Form for updating data in frontend and also created auto-fill function.
-
-# Milestone 14
-
-* Created product delete endpoint for updating products.
-* Created form for Deleting product in the frontend.
-
+# Milestone 14: **Created Product Delete**
+✅ Created Product Delete Endpoint for Updating products. ✅ Created form for Deleting product in frontend.

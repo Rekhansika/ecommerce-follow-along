@@ -30,22 +30,26 @@ app.get("/",(req,res)=>{
 
 app.use("/user",userRouter);
 
-app.use("/product",async(req,res,next)=>{
+app.use("/product",async (req, res, next) => {
     try {
-        const auth = req.headers.authorization;
-        if(!auth){
-            return res.status(401).send({msg:"Please login"});
+        const token = req.header("Authorization");
+        console.log(token)
+        if (!token) {
+            return res.status(401).json({ message: "Please login" });
         }
-        var decoded = jwt.verify(token,process.env.JWT_PASSWORD);
-        const user  = await userModel.findOne({_id:decoded.id});
-        if(!user){
-            return res.status(401).send({msg:"Please register first"});
+        
+        const decoded = jwt.verify(token, process.env.JWT_PASSWORD);
+        const user = await userModel.findById(decoded.id);
+        
+        if (!user && user.id) {
+            return res.status(404).json({ message: "Please signup" });
         }
-
-        console.log(decoded); 
+        console.log(user.id)
+        req.userId = user.id; 
         next();
     } catch (error) {
-        return res.status(500).send({msg:"Something went wrong"});
+        console.log(error)
+        return res.status(400).json({ message: "Invalid Token", error });
     }
 },productRouter);
 
