@@ -65,4 +65,9 @@ The Ecommerce Follow-Along project is a mentor-guided initiative to create a ful
 * Created form for Deleting product in frontend.
 
 # Milestone 15: **Created NavBar**
+* Created NavBar.
 * Created Navigation bar for navigating between pages.
+
+# Milestone 16: **Created Product Details Page**
+* Created Product Details Page for showing full product details in details page.
+* Added Add to cart button with quantity selection.
