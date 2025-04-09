@@ -71,3 +71,7 @@ The Ecommerce Follow-Along project is a mentor-guided initiative to create a ful
 # Milestone 16: **Created Product Details Page**
 * Created Product Details Page for showing full product details in details page.
 * Added Add to cart button with quantity selection.
+
+# Milestone 17: **Created CRUD for cart**
+* Created endpoints in backend CRUD for handling cart.
+* Handled quantity for product in cart.
