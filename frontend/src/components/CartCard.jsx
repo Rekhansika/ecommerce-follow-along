@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "./card.module.css";
 import axios from "axios";
-const CartCard = ({product}) => {
+const MyProductCard = ({product}) => {
 
   async function handleDelete(id){
     try {
@@ -23,37 +23,9 @@ const CartCard = ({product}) => {
   }
   return (
     <div className={styles.card}>
-        <img className={styles.productImg} src={product.images[0]} alt={product.title} />
-        <h3>{product.title}</h3>
-        <p>${product.price}</p>
-        <div
-          style={{
-            display:"flex",
-            justifyContent:"space-around",
-            padding:"0.5rem"
-          }}
-        >
-            <buttons className="btn-del-edt" style={{
-              backgroundColor:"gray",
-              border:"1px solid",
-              borderRadius:"0.3rem",
-              width:"3rem",display:"flex",
-              justifyContent:"space-around",
-              margin:"auto"
-            }}>Edit</buttons>
-            <buttons className="btn-del-edt" style={{
-              backgroundColor:"gray",
-              border:"1px solid",
-              borderRadius:"0.3rem",
-              width:"3rem",display:"flex",
-              justifyContent:"space-around",
-              margin:"auto"
-            }}
-            onClick={()=>handleDelete(product._id)}
-            >Delete</buttons>
-        </div>
+       
     </div>
   )
 }
 
-export default CartCard;
+export default MyProductCard;

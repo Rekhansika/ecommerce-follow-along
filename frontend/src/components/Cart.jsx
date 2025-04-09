@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import styles from "./products.module.css";
-import CartCard from './CartCard';
-import MyProductCard from './MyProductCard';
+import CartCard from "./CartCard.jsx"
 const Cart = () => {
     const [products,setProducts] = useState([]);
-    function getData(){
-        axios.get("http://localhost:8080/allproducts")
-        .then((data)=>{
-            console.log(data);
+    async function getData(){
+        
+       try {
+        const userData = JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id"))
+        const userId = userData.id;
+        const getCartData = await axios.get("http://localhost:8080/cart/cart",
+            {headers: { 
+                "Authorization": userData.token 
+            }}
+        );
+        console.log(getCartData);
 
-            const userData = JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id"))
-            const newData = data.data.products.filter((ele)=>{
-                return ele.userId == userData.id; 
-            })
-            setProducts(newData);
-        }).catch((err)=>{
-            console.log(console.error(err));
-        })
+       } catch (error) {
+        console.log(error);
+        alert("")
+       }
     }
 
 
@@ -31,7 +33,7 @@ const Cart = () => {
         <div className={styles.products}>
         {
             products.map((ele)=>{
-                return <MyProductCard key={ele.id} product={ele}/>
+                return <CartCard key={ele.id} product={ele}/>
             })
         }
     </div>
