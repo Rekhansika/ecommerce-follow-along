@@ -76,6 +76,9 @@ The Ecommerce Follow-Along project is a mentor-guided initiative to create a ful
 * Created endpoints in backend CRUD for handling cart.
 * Handled quantity for product in cart.
 
-# milestone 18: **Frontend for cart page**
+# Milestone 18: **Frontend for cart page**
 * Created cart page in frontend.
 * Created cart operations from frontend.
+
+# Milestone 19: **Backend endpoint for cart item quantity**
+* Created put request for updating quantity for cart item.

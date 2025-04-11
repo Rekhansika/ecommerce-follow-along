@@ -1,6 +1,6 @@
 const express = require("express");
 
-const productModel = require("../models/productModel");
+const productModel = require("../models/productsModel");
 const cartModel = require("../models/cartModel");
 
 const cartRouter = express.Router();
@@ -64,7 +64,7 @@ cartRouter.put("/:cartproductid",async(req,res)=>{
 cartRouter.get("/cart",async(req,res)=>{
     try {
         const userId=req.userId;
-        const cartData = cartModel.find({_id:userId});
+        const cartData = await cartModel.find({_id:userId});
         console.log("cart")
         return res.status(200).send({message:"cart items",cartProducts:cartData.length>0?cartData:"no items found in cart"})
     } catch (error) {

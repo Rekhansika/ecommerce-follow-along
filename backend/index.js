@@ -9,7 +9,7 @@ const path = require("path");
 
 const jwt = require('jsonwebtoken');
 const userModel= require("./models/userModel");
-const cartRouter = require("./controllers/cartProducts")
+const cartRouter = require("./controller/cartProducts")
 
 const cors = require("cors");
 app.use(cors);
