@@ -86,3 +86,8 @@ The Ecommerce Follow-Along project is a mentor-guided initiative to create a ful
 # Milestone 20: **Backend endpoint for User details**
 * Created endpoint for User-details in backend.
 * Created User.jsx for User-details in frontend.
+
+# Milestone 21: **Created frontend for Address**
+* Created route for Add Address Page in Frontend.
+* Created form for adding Address.
+* Stored address using useState Hook.
