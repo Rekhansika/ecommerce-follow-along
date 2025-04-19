@@ -86,4 +86,6 @@ userRouter.post("/login", async (req, res) => {
     }
 });
 
+userRouter.put()
+
 module.exports = userRouter;

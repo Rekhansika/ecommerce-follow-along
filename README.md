@@ -91,3 +91,7 @@ The Ecommerce Follow-Along project is a mentor-guided initiative to create a ful
 * Created route for Add Address Page in Frontend.
 * Created form for adding Address.
 * Stored address using useState Hook.
+
+# Milestone 22: **Created Backend for Address and attached with frontend**
+* Created backend endpoint for handeling address.
+* Added backend endpoint with frontend.
