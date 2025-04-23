@@ -95,3 +95,8 @@ The Ecommerce Follow-Along project is a mentor-guided initiative to create a ful
 # Milestone 22: **Created Backend for Address and attached with frontend**
 * Created backend endpoint for handeling address.
 * Added backend endpoint with frontend.
+
+# Milestone 23: **Worked on address in frontend and backend**
+* Created Placeorder button in cart page and added navigation to select address.
+* Created select address page and provided option to select one address.
+* Created backend endpoint to send all address to user.
