@@ -1,6 +1,6 @@
 const express = require("express");
 
-const productModel = require("../models/productsModel");
+const productModel = require("../models/productModel");
 const cartModel = require("../models/cartModel");
 
 const cartRouter = express.Router();
@@ -13,28 +13,31 @@ cartRouter.get("/cartproduct/:id",async(req,res)=>{
         if(!id){
             return res.status(400).send({message:"id is required"});
         }
-
+        console.log(id)
         const product = await productModel.findOne({_id:id});
-
+        console.log(product)
         if(!product){
+            console.log("product not found")
             return res.status(404).send({message:"product not found"});
         }
 
         const{title,description,price,images} = product;
-
+        console.log("first")
         const newCartProduct = await cartModel.insertOne({
             title,description,price,images,userId:req.userId
         })
-
+        console.log("second")
         return res.status(201).send({message:"product is added to sucessfully"});
 
     } catch (error) {
+        console.log(error)
         return res.status(500).send({message:"something went wrong"});
     }
 })
 
 cartRouter.put("/:cartproductid",async(req,res)=>{
     try {
+        console.log("hjbshbjhasbchjbasjbhjabsc")
         const {cartproductid} = req.params;
         if(!cartproductid){
             return res.status(400).send({message:"please add cart product id"});
@@ -61,10 +64,10 @@ cartRouter.put("/:cartproductid",async(req,res)=>{
     }
 })
 
-cartRouter.get("/cart",async(req,res)=>{
+cartRouter.get("/",async(req,res)=>{
     try {
         const userId=req.userId;
-        const cartData = await cartModel.find({_id:userId});
+        const cartData = await cartModel.find({userId:userId});
         console.log("cart")
         return res.status(200).send({message:"cart items",cartProducts:cartData.length>0?cartData:"no items found in cart"})
     } catch (error) {
