@@ -100,3 +100,9 @@ The Ecommerce Follow-Along project is a mentor-guided initiative to create a ful
 * Created Placeorder button in cart page and added navigation to select address.
 * Created select address page and provided option to select one address.
 * Created backend endpoint to send all address to user.
+
+# Milestone 24: **Worked on address in frontend and backend**
+* Displayed all of products in cart.
+* Displayed all address in address selection page.
+* Displayed total price in cart.
+* Added place order button at the bottom.
