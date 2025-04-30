@@ -111,3 +111,7 @@ The Ecommerce Follow-Along project is a mentor-guided initiative to create a ful
 * Created endpoint for order.
 * Implemented mail service from nodemailer.
 * Handled address for the delivery.
+
+# Milestone 26: **Worked on order backend and email service**
+* Implemented mail with nodemailer.
+* Sending order details to user via mails.
