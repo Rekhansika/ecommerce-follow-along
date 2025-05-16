@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -47,7 +46,7 @@ const Signup = () => {
         formData.append("image", image);
       }
 
-      await axios.post("https://ecommerce-follow-along-i4fd.onrender.com/user/signup", formData, {
+      await axios.post("https://ecommerce-follow-along-ffxu.onrender.com/user/signup", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

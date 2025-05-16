@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CartCard from "./CartCard.jsx";
@@ -14,7 +13,7 @@ const Cart = () => {
       const userData = JSON.parse(
         localStorage.getItem("follow-along-auth-token-user-name-id")
       );
-      const getCartData = await axios.get("https://ecommerce-follow-along-i4fd.onrender.com/cart", {
+      const getCartData = await axios.get("https://ecommerce-follow-along-ffxu.onrender.com/cart", {
         headers: {
           Authorization: userData.token,
         },
@@ -45,20 +44,27 @@ const Cart = () => {
       );
 
       if (quantity === 0) {
-        await axios.put(`https://ecommerce-follow-along-i4fd.onrender.com/${id}?noofcartitem=0`, {
+        await axios.put(`https://ecommerce-follow-along-ffxu.onrender.com/cart/${id}?noofcartitem=0`, {
           headers: {
             Authorization: userData.token,
           },
-        });
+        }
+              ,{
+          withCredentials: true,
+        }
+      );
         setProducts(products.filter((product) => product._id !== id));
       } else {
         await axios.put(
-          `https://ecommerce-follow-along-i4fd.onrender.com/cart/${id}?noofcartitem=${quantity}`,
+          `https://ecommerce-follow-along-ffxu.onrender.com/cart/${id}?noofcartitem=${quantity}`,
           {
             headers: {
               Authorization: userData.token,
             },
           }
+                ,{
+          withCredentials: true,
+        }
         );
         getData();
       }

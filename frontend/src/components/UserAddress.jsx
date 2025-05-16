@@ -1,246 +1,105 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
-const countryStateCityData = {
-  India: {
-    states: {
-      Maharashtra: ["Mumbai", "Pune", "Nagpur"],
-      Bihar: ["Patna", "Gaya", "Bhagalpur"],
-      Delhi: ["New Delhi"],
-    },
-  },
-  USA: {
-    states: {
-      California: ["Los Angeles", "San Francisco", "San Diego"],
-      Texas: ["Houston", "Dallas", "Austin"],
-    },
-  },
-  Canada: {
-    states: {
-      Ontario: ["Toronto", "Ottawa"],
-      Quebec: ["Montreal", "Quebec City"],
-    },
-  },
-};
+const userData =
+  JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id")) || [];
 
-const UserAddress = () => {
-  const [address, setAddress] = useState({
-    country: "",
-    state: "",
-    city: "",
-    address1: "",
-    address2: "",
-    zipCode: "",
-  });
-  const [errors, setErrors] = useState({});
+const User = () => {
+  const [addresses, setAddresses] = useState([]);
+  const navigate = useNavigate();
 
-  const validateForm = () => {
-    const { country, state, city, address1, address2, zipCode } = address;
-    const newErrors = {};
+  const dispatch = useDispatch();
+  const store = useSelector((state) => state.UserReducer);
 
-    if (!country) newErrors.country = "Country is required.";
-    if (!state) newErrors.state = "State is required.";
-    if (!city) newErrors.city = "City is required.";
-    if (!address1) newErrors.address1 = "Address 1 is required.";
-    if (!address2) newErrors.address2 = "Address 2 is required.";
-    if (!zipCode || zipCode.length !== 6)
-      newErrors.zipCode = "ZIP Code must be 6 digits.";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  async function postAddress(event) {
-    event.preventDefault();
-    if (!validateForm()) return;
-
+  // Fetch user addresses
+  async function getAddresses() {
     try {
-      const userData =
-        JSON.parse(localStorage.getItem("follow-along-auth-token-user-name-id")) || [];
-      if (!userData.id) {
-        alert("Please login first");
-        return;
-      }
-
-      const sendAddress = await axios.post(
-        `https://ecommerce-follow-along-i4fd.onrender.com/address`,
-        address,
-        {
-          headers: {
-            Authorization: userData.token,
-          },
-        }
-      );
-
-      alert("Address updated successfully");
+      const response = await axios.get("https://ecommerce-follow-along-ffxu.onrender.com/address", {
+        headers: {
+          Authorization: userData.token,
+        },
+      });
+      setAddresses(response.data.addresses);
     } catch (error) {
-      alert("Something went wrong");
-      console.error(error);
+      console.error("Error fetching addresses:", error);
+      alert("Something went wrong while fetching addresses.");
     }
   }
 
-  const handleCountryChange = (event) => {
-    const selectedCountry = event.target.value;
-    setAddress({
-      ...address,
-      country: selectedCountry,
-      state: "",
-      city: "",
-    });
-  };
-
-  const handleStateChange = (event) => {
-    const selectedState = event.target.value;
-    setAddress({
-      ...address,
-      state: selectedState,
-      city: "",
-    });
-  };
+  useEffect(() => {
+    getAddresses();
+    if(userData){
+      dispatch({ type: "SET_NAME", payload: userData.name });
+      dispatch({ type: "SET_IMAGE", payload: userData.userImage });
+    }
+  }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <form
-        onSubmit={postAddress}
-        className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg"
-      >
-        <h2 className="text-2xl font-bold text-center mb-6 text-blue-600">
-          Add Address
-        </h2>
-
-        {/* Country */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">
-            Select Country
-          </label>
-          <select
-            name="country"
-            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-              errors.country ? "border-red-500 focus:ring-red-500" : "focus:ring-blue-500"
-            }`}
-            onChange={handleCountryChange}
-            value={address.country}
-          >
-            <option value="">Select Country</option>
-            {Object.keys(countryStateCityData).map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
-          {errors.country && <p className="text-red-500 text-sm mt-1">{errors.country}</p>}
-        </div>
-
-        {/* State */}
-        {address.country && (
-          <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-2">Select State</label>
-            <select
-              name="state"
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.state ? "border-red-500 focus:ring-red-500" : "focus:ring-blue-500"
-              }`}
-              onChange={handleStateChange}
-              value={address.state}
-            >
-              <option value="">Select State</option>
-              {Object.keys(countryStateCityData[address.country].states).map((state) => (
-                <option key={state} value={state}>
-                  {state}
-                </option>
-              ))}
-            </select>
-            {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
-          </div>
-        )}
-
-        {/* City */}
-        {address.state && (
-          <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-2">Select City</label>
-            <select
-              name="city"
-              className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-                errors.city ? "border-red-500 focus:ring-red-500" : "focus:ring-blue-500"
-              }`}
-              onChange={(event) =>
-                setAddress({ ...address, city: event.target.value })
-              }
-              value={address.city}
-            >
-              <option value="">Select City</option>
-              {countryStateCityData[address.country].states[address.state].map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
-            {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
-          </div>
-        )}
-
-        {/* Address 1 */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Address 1</label>
-          <textarea
-            name="address1"
-            placeholder="Enter Address 1"
-            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-              errors.address1 ? "border-red-500 focus:ring-red-500" : "focus:ring-blue-500"
-            }`}
-            onChange={(event) =>
-              setAddress({ ...address, [event.target.name]: event.target.value })
-            }
-            value={address.address1}
-          ></textarea>
-          {errors.address1 && <p className="text-red-500 text-sm mt-1">{errors.address1}</p>}
-        </div>
-
-        {/* Address 2 */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">Address 2</label>
-          <textarea
-            name="address2"
-            placeholder="Enter Address 2"
-            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-              errors.address2 ? "border-red-500 focus:ring-red-500" : "focus:ring-blue-500"
-            }`}
-            onChange={(event) =>
-              setAddress({ ...address, [event.target.name]: event.target.value })
-            }
-            value={address.address2}
-          ></textarea>
-          {errors.address2 && <p className="text-red-500 text-sm mt-1">{errors.address2}</p>}
-        </div>
-
-        {/* ZIP Code */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-2">ZIP Code</label>
-          <input
-            type="number"
-            name="zipCode"
-            placeholder="Enter ZIP Code"
-            className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 ${
-              errors.zipCode ? "border-red-500 focus:ring-red-500" : "focus:ring-blue-500"
-            }`}
-            onChange={(event) =>
-              setAddress({ ...address, [event.target.name]: event.target.value })
-            }
-            value={address.zipCode}
+    <div className="min-h-screen bg-gray-100 py-8">
+      <div className="container mx-auto px-4">
+        {/* User Profile Section */}
+        <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg mx-auto">
+          {/* User Image */}
+          <img
+            src={store.image}
+            alt="User"
+            className="w-32 h-32 rounded-full mx-auto object-cover border-4 border-blue-500"
           />
-          {errors.zipCode && <p className="text-red-500 text-sm mt-1">{errors.zipCode}</p>}
-        </div>
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
-        >
-          Submit Address
-        </button>
-      </form>
+          {/* User Name */}
+          <h3 className="text-2xl font-bold text-gray-800 mt-4">{store.name}</h3>
+
+          {/* Add Address Button */}
+          <button
+            className="mt-6 bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600 transition"
+            onClick={() => {
+              navigate("/user-address");
+            }}
+          >
+            Add Address
+          </button>
+
+          {/* User Addresses Section */}
+          <h2 className="text-xl font-bold text-gray-800 mt-8 mb-4">
+            Your Addresses
+          </h2>
+          {addresses.length > 0 ? (
+            <div className="space-y-4">
+              {addresses.map((address, idx) => (
+                <div
+                  key={address._id}
+                  className="bg-gray-100 p-4 rounded-md shadow-sm border border-gray-300"
+                >
+                  <h3 className="text-lg font-semibold text-blue-600 mb-2">
+                    {`Address ${idx + 1}`}
+                  </h3>
+                  <p className="text-gray-700">
+                    <span className="font-medium">Country:</span> {address.country}
+                  </p>
+                  <p className="text-gray-700">
+                    <span className="font-medium">City:</span> {address.city}
+                  </p>
+                  <p className="text-gray-700">
+                    <span className="font-medium">Address 1:</span> {address.address1}
+                  </p>
+                  <p className="text-gray-700">
+                    <span className="font-medium">Address 2:</span> {address.address2}
+                  </p>
+                  <p className="text-gray-700">
+                    <span className="font-medium">ZIP Code:</span> {address.zipCode}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-600">No addresses found.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default UserAddress;
+export default User;

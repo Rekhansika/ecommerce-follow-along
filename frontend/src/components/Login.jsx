@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -35,8 +34,10 @@ const Login = () => {
 
     try {
       const checkUser = await axios.post(
-        "https://ecommerce-follow-along-i4fd.onrender.com/user/login",
-        loginData
+        "https://ecommerce-follow-along-ffxu.onrender.com/user/login",
+        loginData,{
+          withCredentials: true,
+        }
       );
       console.log(checkUser);
       localStorage.setItem(

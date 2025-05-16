@@ -1,4 +1,3 @@
-
 const express = require("express");
 
 const app = express();
@@ -19,9 +18,18 @@ const userModel = require("./models/userModel");
 
 const cors = require("cors");
 
+const cookieParsher = require("cookie-parser");
+
+app.use(cookieParsher());
+
 const cartRouter = require("./controller/cartProducts");
 
-app.use(cors());
+
+
+app.use(cors({
+    origin: "https://ecommerce-follow-along-alpha.vercel.app", 
+    credentials: true,
+}));
 
 const MONGO_PASSWORD = process.env.MONGO_PASSWORD;
 
@@ -43,6 +51,7 @@ const mailer = require("./nodemailer");
 const orderRouter = require("./controller/orderRouter");
 
 
+
 app.get("/",(req,res)=>{
     try {
         res.send({message:"This is E-commerce Follow Along Backend"});
@@ -55,7 +64,7 @@ app.use("/user",useRouter);
 
 app.use("/product",async (req, res, next) => {
     try {
-        const token = req.header("Authorization");
+        const token = req.cookies.token;
         console.log(token)
         if (!token) {
             return res.status(401).json({ message: "Please login" });
@@ -80,7 +89,7 @@ app.use("/cart",
     async (req, res, next) => {
         console.log("cart")
         try {
-            const token = req.header("Authorization");
+            const token = req.cookies.token;
             console.log(token)
             if (!token) {
                 return res.status(401).json({ message: "Please login" });
@@ -102,11 +111,11 @@ app.use("/cart",
     } 
     ,cartRouter);
 
-app.use("/address",
+    app.use("/address",
         async (req, res, next) => {
             console.log("cart")
             try {
-                const token = req.header("Authorization");
+                const token = req.cookies.token;
                 console.log(token)
                 if (!token) {
                     return res.status(401).json({ message: "Please login" });
@@ -130,10 +139,10 @@ app.use("/address",
     );
 
 
-app.use("/order",async (req, res, next) => {
+    app.use("/order",async (req, res, next) => {
         console.log("cart")
         try {
-            const token = req.header("Authorization");
+            const token = req.cookies.token;
             console.log(token)
             if (!token) {
                 return res.status(401).json({ message: "Please login" });
@@ -158,11 +167,14 @@ app.use("/allproducts",allProductRouter);
 
 app.use("/uploads",express.static(path.join(__dirname,"uploads")));
 
-app.listen(PORT,async ()=>{
+app.listen(8080,async ()=>{
     try {
-       await mongoose.connect(`mongodb+srv://rekhansikagoluguri07:${MONGO_PASSWORD}@cluster0.zk6ur.mongodb.net/`);
+       await mongoose.connect(`mongodb+srv://abhishektiwari136136:${MONGO_PASSWORD}@cluster0.55lt4.mongodb.net/`);
        console.log("Connected sucessfully");
     } catch (error) {
         console.log("Something went wrong not able to connect to server",error);
     }
 });
+
+
+

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -10,11 +9,15 @@ const AllAddress = () => {
       const userData = JSON.parse(
         localStorage.getItem("follow-along-auth-token-user-name-id")
       );
-      const response = await axios.get("https://ecommerce-follow-along-i4fd.onrender.com/address", {
+      const response = await axios.get("https://ecommerce-follow-along-ffxu.onrender.com/address", {
         headers: {
           Authorization: userData.token,
         },
-      });
+      }
+          ,{
+          withCredentials: true,
+        }
+    );
       setAddress(response.data.addresses);
       console.log(response);
       alert("Data fetched successfully");
