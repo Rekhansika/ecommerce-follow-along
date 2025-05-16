@@ -11,7 +11,7 @@ const MyProductCard = ({product}) => {
           return;
       }
       console.log(token,id)
-      await axios.delete(`http://localhost:8080/product/delete/${id}`,{
+      await axios.delete(`https://ecommerce-follow-along-i4fd.onrender.com/delete/${id}`,{
         headers: { 
             "Authorization": token.token 
         }

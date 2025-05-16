@@ -15,7 +15,7 @@ const Checkout = () => {
       const userData = JSON.parse(
         localStorage.getItem("follow-along-auth-token-user-name-id")
       );
-      const response = await axios.get("http://localhost:8080/address", {
+      const response = await axios.get("https://ecommerce-follow-along-i4fd.onrender.com/address", {
         headers: {
           Authorization: userData.token,
         },
@@ -51,7 +51,7 @@ const Checkout = () => {
       console.log(productIds, "productIds");
       // Send order details to the backend
       await axios.post(
-        "http://localhost:8080/order",
+        "https://ecommerce-follow-along-i4fd.onrender.com/order",
         {
           addressId: selectedAddress,
           productIDS: productIds,

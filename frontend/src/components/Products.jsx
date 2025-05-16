@@ -8,7 +8,7 @@ const Products = () => {
 
   function getData() {
     axios
-      .get("http://localhost:8080/allproducts")
+      .get("https://ecommerce-follow-along-i4fd.onrender.com/allproducts")
       .then((data) => {
         console.log(data);
         setProducts(data.data.products);

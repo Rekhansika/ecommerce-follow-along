@@ -35,7 +35,7 @@ const Login = () => {
 
     try {
       const checkUser = await axios.post(
-        "http://localhost:8080/user/login",
+        "https://ecommerce-follow-along-i4fd.onrender.com/user/login",
         loginData
       );
       console.log(checkUser);

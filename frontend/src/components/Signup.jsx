@@ -47,7 +47,7 @@ const Signup = () => {
         formData.append("image", image);
       }
 
-      await axios.post("http://localhost:8080/user/signup", formData, {
+      await axios.post("https://ecommerce-follow-along-i4fd.onrender.com/user/signup", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

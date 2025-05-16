@@ -10,7 +10,7 @@ const AllAddress = () => {
       const userData = JSON.parse(
         localStorage.getItem("follow-along-auth-token-user-name-id")
       );
-      const response = await axios.get("http://localhost:8080/address", {
+      const response = await axios.get("https://ecommerce-follow-along-i4fd.onrender.com/address", {
         headers: {
           Authorization: userData.token,
         },

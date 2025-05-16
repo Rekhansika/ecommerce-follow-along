@@ -9,7 +9,7 @@ const MyProducts = () => {
   // Fetch products for the logged-in user
   async function getData() {
     try {
-      const response = await axios.get("http://localhost:8080/allproducts");
+      const response = await axios.get("https://ecommerce-follow-along-i4fd.onrender.com/allproducts");
       const userData = JSON.parse(
         localStorage.getItem("follow-along-auth-token-user-name-id")
       );
